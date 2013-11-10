@@ -1,0 +1,21 @@
+{
+    "name": "astina/bernard-bundle",
+    "description": "Symfony bundle integrating BernardPHP",
+    "require": {
+        "bernard/bernard": ">=0.11.0,<1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Astina AG",
+            "homepage": "https://github.com/astina/AstinaBernardBundle/contributors"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Astina\\Bundle\\BernardBundle": ""
+        }
+    },
+    "target-dir": "Astina/Bundle/BernardBundle",
+    "minimum-stability": "stable"
+}
