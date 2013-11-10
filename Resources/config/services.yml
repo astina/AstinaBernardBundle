@@ -1,0 +1,61 @@
+parameters:
+    astina_bernard.driver.class: Bernard\Driver\DoctrineDriver
+    astina_bernard.consumer.class: Bernard\Consumer
+    astina_bernard.producer.class: Bernard\Producer
+    astina_bernard.receivers.class: Astina\Bundle\BernardBundle\Router\ServiceRouter
+    astina_bernard.serializer.class: Bernard\Serializer\SimpleSerializer
+    astina_bernard.producer_middleware.class: Bernard\Middleware\MiddlewareBuilder
+    astina_bernard.consumer_middleware.class: Bernard\Middleware\MiddlewareBuilder
+    astina_bernard.queue_factory.class: Bernard\QueueFactory\PersistentFactory
+    astina_bernard.logger_factory.class: Bernard\Middleware\LoggerFactory
+    astina_bernard.failures_factory.class: Bernard\Middleware\FailuresFactory
+
+services:
+
+    astina_bernard.driver:
+        class: %astina_bernard.driver.class%
+
+    astina_bernard.consumer:
+        class: %astina_bernard.consumer.class%
+        arguments:
+            - @astina_bernard.receivers
+            - @astina_bernard.consumer_middleware
+
+    astina_bernard.producer:
+        class: %astina_bernard.producer.class%
+        arguments:
+            - @astina_bernard.queue_factory
+            - @astina_bernard.producer_middleware
+
+    astina_bernard.receivers:
+        class: %astina_bernard.receivers.class%
+        arguments:
+            - @service_container
+
+    astina_bernard.serializer:
+        class: %astina_bernard.serializer.class%
+
+    astina_bernard.producer_middleware:
+        class: %astina_bernard.producer_middleware.class%
+
+    astina_bernard.consumer_middleware:
+        class: %astina_bernard.consumer_middleware.class%
+        calls:
+            - [ push, [ @astina_bernard.logger_factory ] ]
+            - [ push, [ @astina_bernard.failures_factory ] ]
+
+    astina_bernard.queue_factory:
+        class: %astina_bernard.queue_factory.class%
+        arguments:
+            - @astina_bernard.driver
+            - @astina_bernard.serializer
+
+    astina_bernard.logger_factory:
+        class: %astina_bernard.logger_factory.class%
+        arguments:
+            - @logger
+
+    astina_bernard.failures_factory:
+        class: %astina_bernard.failures_factory.class%
+        arguments:
+            - @astina_bernard.queue_factory
