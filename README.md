@@ -65,6 +65,22 @@ Define message receiver services by tagging them as `astina_bernard.receiver`.
 </service>
 ```
 
+In your service implementation you will now receive messages in the defined method ("foo"):
+
+```php
+namespace Astina\Bundle\SandboxBundle\Foo;
+
+use Bernard\Message\DefaultMessage;
+
+class MyMessageReceiver
+{
+    public function foo(DefaultMessage $message)
+    {
+        // do something
+    }
+}
+``` 
+
 Run consumer command to consume messages from a queue:
 
 `app/console astina:bernard:consume my_queue`
