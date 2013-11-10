@@ -83,7 +83,7 @@ class MyMessageReceiver
 
 Run consumer command to consume messages from a queue:
 
-`app/console astina:bernard:consume my_queue`
+`app/console bernard:consume my_queue`
 
 **Note**: Don't forget to set `-e=prod` when using in production. Otherwise the command will eventually use up all memory.
 
