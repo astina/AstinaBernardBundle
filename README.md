@@ -3,6 +3,8 @@ Astina Bernard Bundle
 
 Symfony bundle integrating https://github.com/bernardphp/bernard
 
+DbalSchemaCommand was copied from https://github.com/stanlemon/bernard-bundle
+
 ## Install
 
 ### Step 1: Add to composer.json
