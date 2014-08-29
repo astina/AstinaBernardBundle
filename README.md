@@ -1,6 +1,9 @@
 Astina Bernard Bundle
 =====================
 
+*There is now an official bundle: https://github.com/bernardphp/BernardBundle*
+
+
 Symfony bundle integrating https://github.com/bernardphp/bernard
 
 DbalSchemaCommand was copied from https://github.com/stanlemon/bernard-bundle
